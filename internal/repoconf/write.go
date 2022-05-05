@@ -4,12 +4,18 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"os"
 )
 
 func WriteConfig(data Config) error {
 	configPath, exists := GetLibPath()
+	filename, _ := GetLibPath()
 	if exists == false {
-		log.Fatal("Write: config doesn't exist")
+		file, err := os.Create(filename)
+		if err != nil {
+			log.Fatalf("write: couldn't create %s", filename)
+		}
+		defer file.Close()
 	}
 
 	content, err := json.Marshal(data)
