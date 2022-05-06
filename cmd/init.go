@@ -25,7 +25,7 @@ func initConfig(cmd *cobra.Command) {
 	root, _ := repoconf.GetRootPath()
 	_, exists := repoconf.GetLibPath()
 
-	emptyConfig := repoconf.Config{}
+	emptyConfig := repoconf.NewConfig()
 	emptyConfig.Tags = make([]string, 0)
 
 	if exists == false {
@@ -35,11 +35,17 @@ func initConfig(cmd *cobra.Command) {
 			log.Fatal("init: couldn't create startup script")
 		}
 	} else {
-		log.Fatalf("Could not create the root directory at '%s'. You may have to create the dir or check that nothing with the same name exists already.", root)
+		force, _ := cmd.Flags().GetBool("force")
+		if force == true {
+			log.Fatalf("Implement delete file at %s", root)
+		} else {
+			log.Fatalf("Could not create the root directory at '%s'. You may have to create the dir or check that nothing with the same name exists already.", root)
+		}
 	}
 	fmt.Printf("Init successful. New `repo` dir made at %s.", root)
 }
 
 func init() {
 	rootCmd.AddCommand(initCmd)
+	initCmd.Flags().BoolP("force", "f", false, "Delete and restart a new repo.")
 }
