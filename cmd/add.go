@@ -18,11 +18,11 @@ var addCmd = &cobra.Command{
 	Use:   "add [OPTIONS]",
 	Short: "Store an object to the memo.",
 	Run: func(cmd *cobra.Command, args []string) {
-		addTag, _ := cmd.Flags().GetBool("tag")
+		tagCmd, _ := cmd.Flags().GetBool("tag")
 		description, _ := cmd.Flags().GetString("description")
 		tags, _ := cmd.Flags().GetStringSlice("tags")
 
-		if addTag == true {
+		if tagCmd == true {
 			if description != "" {
 				log.Fatal("Can't add description when adding a new tag")
 			}
