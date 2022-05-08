@@ -57,6 +57,12 @@ func addNewItem(cmd *cobra.Command) {
 		item.Description = description
 	}
 
+	tags, _ := flags.GetStringSlice("tags")
+	if len(tags) != 0 {
+		item.Tags = tags
+		addNewTag(cmd, tags)
+	}
+
 	repo := repoconf.ReadConfig()
 	if _, exists := repo.Items[name]; !exists {
 		repo.Items[name] = item
@@ -78,4 +84,6 @@ func init() {
 	flags.StringP("content", "c", "", "Can be a link, note or whatever you want to repo")
 	flags.StringP("name", "n", "", "Name to reference the item with")
 	flags.StringP("description", "d", "", "Optional info regarding the resource")
+
+	flags.StringSlice("tags", make([]string, 0), "Add tags to assign to the item. Call with --create to add tags that don't exist")
 }
