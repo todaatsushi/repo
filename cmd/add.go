@@ -18,9 +18,10 @@ var addCmd = &cobra.Command{
 	Use:   "add [OPTIONS]",
 	Short: "Store an object to the memo.",
 	Run: func(cmd *cobra.Command, args []string) {
-		tagCmd, _ := cmd.Flags().GetBool("tag")
-		description, _ := cmd.Flags().GetString("description")
-		tags, _ := cmd.Flags().GetStringSlice("tags")
+		flags := cmd.Flags()
+		tagCmd, _ := flags.GetBool("tag")
+		description, _ := flags.GetString("description")
+		tags, _ := flags.GetStringSlice("tags")
 
 		if tagCmd == true {
 			if description != "" {
@@ -46,9 +47,10 @@ func addNewTag(cmd *cobra.Command, args []string) {
 }
 
 func addNewItem(cmd *cobra.Command) {
-	name, _ := cmd.Flags().GetString("name")
-	content, _ := cmd.Flags().GetString("content")
-	description, _ := cmd.Flags().GetString("description")
+	flags := cmd.Flags()
+	name, _ := flags.GetString("name")
+	content, _ := flags.GetString("content")
+	description, _ := flags.GetString("description")
 
 	item := repoconf.NewMemo(content, name)
 	if description != "" {
