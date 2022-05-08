@@ -8,7 +8,7 @@ type Memo struct {
 
 type Config struct {
 	Tags  []string        `json:"tags"`
-	Items map[string]Memo `json:"items,omitempty"`
+	Items map[string]Memo `json:"items"`
 }
 
 func NewMemo(content string) Memo {

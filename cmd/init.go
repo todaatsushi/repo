@@ -27,6 +27,7 @@ func initConfig(cmd *cobra.Command) {
 
 	emptyConfig := repoconf.NewConfig()
 	emptyConfig.Tags = make([]string, 0)
+	emptyConfig.Items = make(map[string]repoconf.Memo)
 
 	if exists == false {
 		_ = os.MkdirAll(root, os.ModePerm)
