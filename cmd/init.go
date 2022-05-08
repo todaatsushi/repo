@@ -23,16 +23,14 @@ var initCmd = &cobra.Command{
 
 func initConfig(cmd *cobra.Command) {
 	root, _ := repoconf.GetRootPath()
-	filename, exists := repoconf.GetLibPath()
+	_, exists := repoconf.GetLibPath()
+
+	emptyConfig := repoconf.Config{}
+	emptyConfig.Tags = make([]string, 0)
 
 	if exists == false {
 		_ = os.MkdirAll(root, os.ModePerm)
-		file, err := os.Create(filename)
-		if err != nil {
-			log.Fatalf("init: couldn't create %s", filename)
-			return
-		}
-		defer file.Close()
+		err := repoconf.WriteConfig(emptyConfig)
 		if err != nil {
 			log.Fatal("init: couldn't create startup script")
 		}
