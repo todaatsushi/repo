@@ -11,6 +11,7 @@ import (
 	"log"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 )
 
 // addCmd represents the add command
@@ -73,10 +74,7 @@ func addNewItem(cmd *cobra.Command) {
 	fmt.Println("Added item:", name)
 }
 
-func init() {
-	rootCmd.AddCommand(addCmd)
-	flags := addCmd.Flags()
-
+func addFlags(flags *pflag.FlagSet) {
 	// Tag
 	flags.BoolP("tag", "t", false, "Indicates that you want to add a tag, not a resource")
 
@@ -86,4 +84,11 @@ func init() {
 	flags.StringP("description", "d", "", "Optional info regarding the resource")
 
 	flags.StringSlice("tags", make([]string, 0), "Add tags to assign to the item. Call with --create to add tags that don't exist")
+}
+
+func init() {
+	rootCmd.AddCommand(addCmd)
+
+	flags := addCmd.Flags()
+	addFlags(flags)
 }
