@@ -44,8 +44,19 @@ func removeTag(cmd *cobra.Command, tags []string) {
 	fmt.Println("Tags successfully removed.")
 }
 
-func removeItems(cmd *cobra.Command, itemNames []string) {
-	fmt.Println("remove items")
+func removeItems(cmd *cobra.Command, toRemove []string) {
+	config := repoconf.ReadConfig()
+	current := config.Items
+
+	for _, item := range toRemove {
+		if _, exists := current[item]; !exists {
+			fmt.Printf("warning: '%s' doesn't exist, skipping\n", item)
+		} else {
+			delete(current, item)
+			fmt.Println("Removing", item)
+		}
+	}
+	repoconf.WriteConfig(config)
 }
 
 func init() {
