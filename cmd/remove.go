@@ -19,7 +19,7 @@ var removeCmd = &cobra.Command{
 		if tagCmd == true {
 			removeTag(cmd, args)
 		} else {
-			fmt.Println("remove item")
+			removeItems(cmd, args)
 		}
 	},
 }
@@ -42,6 +42,10 @@ func removeTag(cmd *cobra.Command, tags []string) {
 	repoconf.WriteConfig(config)
 
 	fmt.Println("Tags successfully removed.")
+}
+
+func removeItems(cmd *cobra.Command, itemNames []string) {
+	fmt.Println("remove items")
 }
 
 func init() {
