@@ -83,7 +83,7 @@ func addFlags(flags *pflag.FlagSet) {
 	flags.StringP("name", "n", "", "Name to reference the item with")
 	flags.StringP("description", "d", "", "Optional info regarding the resource")
 
-	flags.StringSlice("tags", make([]string, 0), "Add tags to assign to the item. Call with --create to add tags that don't exist")
+	flags.StringSlice("tags", make([]string, 0), "Add tags to assign to the item.")
 }
 
 func init() {
