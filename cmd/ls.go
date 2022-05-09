@@ -15,7 +15,9 @@ var lsCmd = &cobra.Command{
 	Use:   "ls",
 	Short: "List all items in the repo, optionally by tag",
 	Run: func(cmd *cobra.Command, args []string) {
-		listItems(cmd, args)
+		flags := cmd.Flags()
+		tags, _ := flags.GetStringSlice("tags")
+		listItems(cmd, tags)
 	},
 }
 
@@ -25,4 +27,7 @@ func listItems(cmd *cobra.Command, tags []string) {
 
 func init() {
 	rootCmd.AddCommand(lsCmd)
+
+	flags := lsCmd.Flags()
+	flags.StringSlice("tags", make([]string, 0), "")
 }
