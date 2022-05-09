@@ -25,9 +25,9 @@ var removeCmd = &cobra.Command{
 }
 
 func removeTag(cmd *cobra.Command, tags []string) {
-	config := repoconf.ReadConfig()
+	repo := repoconf.ReadConfig()
 	toRemove := make(map[string]bool)
-	currentTags := config.Tags
+	currentTags := repo.Tags
 	for _, tag := range tags {
 		toRemove[tag] = true
 	}
@@ -38,15 +38,15 @@ func removeTag(cmd *cobra.Command, tags []string) {
 			newTags = append(newTags, tag)
 		}
 	}
-	config.Tags = newTags
-	repoconf.WriteConfig(config)
+	repo.Tags = newTags
+	repoconf.WriteConfig(repo)
 
 	fmt.Println("Tags successfully removed.")
 }
 
 func removeItems(cmd *cobra.Command, toRemove []string) {
-	config := repoconf.ReadConfig()
-	current := config.Items
+	repo := repoconf.ReadConfig()
+	current := repo.Items
 
 	for _, item := range toRemove {
 		if _, exists := current[item]; !exists {
@@ -56,7 +56,7 @@ func removeItems(cmd *cobra.Command, toRemove []string) {
 			fmt.Println("Removing", item)
 		}
 	}
-	repoconf.WriteConfig(config)
+	repoconf.WriteConfig(repo)
 }
 
 func init() {
