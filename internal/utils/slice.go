@@ -11,3 +11,12 @@ func GetUniqueTags(tags []string) []string {
 	}
 	return unique
 }
+
+func TagInItem(tag *string, tags *[]string) bool {
+	for _, tag2 := range *tags {
+		if *tag == tag2 {
+			return true
+		}
+	}
+	return false
+}
