@@ -6,6 +6,8 @@ package cmd
 
 import (
 	"fmt"
+	"internal/repoconf"
+	"internal/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -22,7 +24,18 @@ var lsCmd = &cobra.Command{
 }
 
 func listItems(cmd *cobra.Command, tags []string) {
-	fmt.Println("ls called")
+	items := repoconf.ReadConfig()
+	if len(tags) == 0 {
+		tags = items.Tags
+	}
+	for name, item := range items.Items {
+		for _, tag := range item.Tags {
+			tagInItem := utils.TagInItem(&tag, &tags)
+			if tagInItem {
+				fmt.Println("tagged:", name, item)
+			}
+		}
+	}
 }
 
 func init() {
