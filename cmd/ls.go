@@ -39,7 +39,7 @@ func listItems(cmd *cobra.Command, tags []string) {
 		}
 	}
 	fmt.Println("Items:")
-	for name, _ := range toDisplay {
+	for name := range toDisplay {
 		fmt.Println(name)
 	}
 }
