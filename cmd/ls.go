@@ -48,5 +48,5 @@ func init() {
 	rootCmd.AddCommand(lsCmd)
 
 	flags := lsCmd.Flags()
-	flags.StringSlice("tags", make([]string, 0), "")
+	flags.StringSliceP("tags", "t", make([]string, 0), "")
 }
