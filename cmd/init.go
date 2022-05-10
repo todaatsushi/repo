@@ -43,7 +43,7 @@ func initConfig(cmd *cobra.Command) {
 			log.Fatalf("Could not create the root directory at '%s'. You may have to create the dir or check that nothing with the same name exists already.", root)
 		}
 	}
-	fmt.Printf("Init successful. New `repo` dir made at %s.", root)
+	fmt.Printf("Init successful. New `repo` dir made at %s.\n", root)
 }
 
 func init() {
