@@ -12,7 +12,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// lsCmd represents the ls command
 var lsCmd = &cobra.Command{
 	Use:   "ls",
 	Short: "List all items in the repo, optionally by tag",
