@@ -28,13 +28,20 @@ func listItems(cmd *cobra.Command, tags []string) {
 	if len(tags) == 0 {
 		tags = items.Tags
 	}
+	toDisplay := make(map[string]string)
 	for name, item := range items.Items {
 		for _, tag := range item.Tags {
 			tagInItem := utils.TagInItem(&tag, &tags)
 			if tagInItem {
-				fmt.Println("tagged:", name, item)
+				if _, exists := toDisplay[name]; !exists {
+					toDisplay[name] = item.Content
+				}
 			}
 		}
+	}
+	fmt.Println("Items:")
+	for name, _ := range toDisplay {
+		fmt.Println(name)
 	}
 }
 
