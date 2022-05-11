@@ -27,20 +27,20 @@ func listItems(cmd *cobra.Command, tags []string) {
 	if len(tags) == 0 {
 		tags = items.Tags
 	}
-	toDisplay := make(map[string]string)
+	toDisplay := make(map[string]*repoconf.Item)
 	for name, item := range items.Items {
 		for _, tag := range item.Tags {
 			tagInItem := utils.TagInItem(&tag, &tags)
 			if tagInItem {
 				if _, exists := toDisplay[name]; !exists {
-					toDisplay[name] = item.Content
+					toDisplay[name] = &item
 				}
 			}
 		}
 	}
 	fmt.Println("Items:")
-	for name := range toDisplay {
-		fmt.Println(name)
+	for _, item := range toDisplay {
+		utils.DisplayItemLS(item)
 	}
 }
 

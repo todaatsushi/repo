@@ -53,7 +53,7 @@ func addNewItem(cmd *cobra.Command) {
 	content, _ := flags.GetString("content")
 	description, _ := flags.GetString("description")
 
-	item := repoconf.NewMemo(content, name)
+	item := repoconf.NewItem(content, name)
 	if description != "" {
 		item.Description = description
 	}

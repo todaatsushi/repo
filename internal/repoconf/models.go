@@ -1,6 +1,6 @@
 package repoconf
 
-type Memo struct {
+type Item struct {
 	Tags        []string `json:"tags"`
 	Content     string   `json:"content"`
 	Description string   `json:"description"`
@@ -9,11 +9,11 @@ type Memo struct {
 
 type Config struct {
 	Tags  []string        `json:"tags"`
-	Items map[string]Memo `json:"items"`
+	Items map[string]Item `json:"items"`
 }
 
-func NewMemo(content string, name string) Memo {
-	return Memo{Content: content, Name: name}
+func NewItem(content string, name string) Item {
+	return Item{Content: content, Name: name}
 }
 
 func NewConfig() Config {
