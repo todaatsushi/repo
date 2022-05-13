@@ -40,7 +40,7 @@ func listItems(cmd *cobra.Command, tags []string) {
 	}
 	fmt.Println("Items:")
 	for _, item := range toDisplay {
-		utils.DisplayItemLS(item)
+		fmt.Printf("%s    --    %v\n", item.Name, item.Tags)
 	}
 }
 
