@@ -29,12 +29,13 @@ func listItems(cmd *cobra.Command, tags []string) {
 	}
 	toDisplay := make(map[string]*repoconf.Item)
 	for name, item := range items.Items {
+		includeItem := true
 		for _, tag := range item.Tags {
-			tagInItem := utils.TagInItem(&tag, &tags)
-			if tagInItem {
-				if _, exists := toDisplay[name]; !exists {
-					toDisplay[name] = &item
-				}
+			includeItem = utils.TagInItem(&tag, &tags)
+		}
+		if includeItem == true {
+			if val := toDisplay[name]; val == nil {
+				toDisplay[name] = &item
 			}
 		}
 	}
